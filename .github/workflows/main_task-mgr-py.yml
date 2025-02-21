@@ -37,7 +37,6 @@ jobs:
 
       - name: Zip artifact for deployment
         run: |
-          cd task-management-app-py
           zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
@@ -45,7 +44,7 @@ jobs:
         with:
           name: python-app
           path: |
-            task-management-app-py/release.zip
+            release.zip
             !venv/
 
   deploy:
