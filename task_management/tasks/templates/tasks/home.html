@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Task Management App</h1>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name">Add a new task</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label for="id_category">Category</label>
+                {{ form.category }}
+            </div>
+            <div class="form-group">
+                <label for="id_tags">Tags (comma separated)</label>
+                {{ form.tags }}
+            </div>
+            <div class="form-group">
+                <label for="id_due_date">Due Date</label>
+                {{ form.due_date }}
+            </div>
+            <button type="submit" class="btn btn-success">Add Task</button>
+            <button type="submit" name="clear_tasks" class="btn btn-danger">Clear All</button>
+        </form>
+        <div class="mt-4">
+            {% if tasks %}
+                {% for task in tasks %}
+                    <div class="task">
+                        <span class="task-description">{{ task.name }}</span>
+                        <span class="task-category">{{ task.category }}</span>
+                        <span class="task-tags">{{ task.tags }}</span>
+                        <span class="task-due-date">{{ task.due_date }}</span>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No tasks available.</p>
+            {% endif %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
